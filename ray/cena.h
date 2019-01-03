@@ -33,7 +33,7 @@ public:
 	Cor determinar_cor_objeto(const ObjIntersecao& obj);
 
 private:
-	bool objeto_visivel_a_luz(const Vec3& ponto, const Luz& luz);
+	bool objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz);
 };
 
 #endif

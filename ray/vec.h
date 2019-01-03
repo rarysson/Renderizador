@@ -28,6 +28,8 @@ public:
 
 	friend Vec3 operator/(const Vec3& vlh, float vrh);
 
+	friend bool operator==(const Vec3& vlh, const Vec3& vrh);
+
 	Vec3 normalizar() const;
 
 	float modulo() const;

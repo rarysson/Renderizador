@@ -28,6 +28,8 @@ public:
 	Vec3* interceptar(const Raio& r) const;
 
 	Raio dispersar_raio(const Raio& raio) const;
+
+	Vec3 get_centro() const;
 };
 
 #endif

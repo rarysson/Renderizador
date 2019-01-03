@@ -44,3 +44,7 @@ Vec3* Esfera::interceptar(const Raio& r) const {
 Raio Esfera::dispersar_raio(const Raio& raio) const {
 	return  material->dispersar(raio, *this);
 }
+
+Vec3 Esfera::get_centro() const {
+	return centro;
+}

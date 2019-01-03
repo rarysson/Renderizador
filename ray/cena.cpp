@@ -45,8 +45,8 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 	int n = 1;
 
 	for (auto luz : lista_luzes) {
-		if (objeto_visivel_a_luz(obj.ponto_interceptado, luz)) {
-			c += luz.cor;
+		if (objeto_visivel_a_luz(obj, luz)) {
+			c += luz.cor + obj.esfera.get_cor();
 			++n;
 		}
 	}
@@ -58,10 +58,14 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 	return c;
 }
 
-bool Cena::objeto_visivel_a_luz(const Vec3& ponto, const Luz& luz) {
-	Raio r = Raio(ponto, luz.posicao);
+bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
+	Raio r = Raio(obj.ponto_interceptado, luz.posicao);
 
 	for (auto esfera : lista_esferas) {
+		if (esfera.get_centro() == obj.esfera.get_centro()) {
+			continue;
+		}
+
 		Vec3* ponto_l = esfera.interceptar(r);
 
 		if (ponto_l != nullptr) {
