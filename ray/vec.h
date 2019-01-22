@@ -20,6 +20,8 @@ public:
 
 	friend Vec3 operator+(const Vec3& vlh, const Vec3& vrh);
 
+	friend Vec3 operator+(const Vec3& vlh, int vrh);
+
 	friend Vec3 operator-(const Vec3& vlh, const Vec3& vrh);
 
 	Vec3 operator*(float v) const;

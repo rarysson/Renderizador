@@ -1,4 +1,5 @@
 #include "cena.h"
+#include <iostream>
 
 Cena::Cena(const std::vector<Esfera>& e, const std::vector<Luz>& l) : 
 	lista_esferas {e}, lista_luzes {l} {}
@@ -11,7 +12,7 @@ void Cena::adicionar_luz(const Luz& l) {
 	lista_luzes.push_back(l);
 }
 
-ObjIntersecao Cena::tracejar_raio(const Raio& raio) {
+ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	ObjIntersecao obj;
 
 	obj.ponto_interceptado = Vec3(10000.0f, 10000.0f, 10000.0f);
@@ -20,6 +21,9 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio) {
 	float menor_distancia = vet_dirt.modulo();
 
 	for (auto esfera : lista_esferas) {
+		if (esfera.get_centro() == esf_inter.get_centro())
+			continue;
+
 		Vec3* ponto_interceptado = esfera.interceptar(raio);
 
 		if (ponto_interceptado != nullptr) {
@@ -42,11 +46,18 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio) {
 
 Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 	Cor c;
-	int n = 1;
+	int n = 0;
 
 	for (auto luz : lista_luzes) {
 		if (objeto_visivel_a_luz(obj, luz)) {
-			c += luz.cor + obj.esfera.get_cor();
+			Vec3 l = (obj.ponto_interceptado - luz.posicao).normalizar();
+			Vec3 e = obj.esfera.normal(obj.ponto_interceptado);
+
+			float co = e.produto_escalar(l);
+
+			if (co > 0.0f)
+				c += /*luz.cor +*/ obj.esfera.get_cor() * co;
+
 			++n;
 		}
 	}

@@ -21,6 +21,8 @@ public:
 
 	friend Cor operator*(const Cor& vlh, const Cor& vrh);
 
+	friend Cor operator*(const Cor& vlh, float vrh);
+
 	friend Cor operator+(const Cor& vlh, const Cor& vrh);
 
 	Cor& operator+=(const Cor& vrh);

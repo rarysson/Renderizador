@@ -1,5 +1,6 @@
 #include "material.h"
 #include "esfera.h"
+#include "util.h"
 
 
 
@@ -11,5 +12,6 @@ Raio Liso::dispersar(const Raio& raio_origem, const Esfera& esfera_interceptada)
 }
 
 Raio Difuso::dispersar(const Raio& raio_origem, const Esfera& esfera_interceptada) {
-	return Raio(Vec3(), Vec3());
+	Vec3 v = raio_origem.destino + esfera_interceptada.normal(raio_origem.destino) + ut::int_aleatorio(-1, 1);
+	return Raio(raio_origem.destino, v);
 }

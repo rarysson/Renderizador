@@ -19,6 +19,10 @@ Cor operator*(const Cor & vlh, const Cor & vrh) {
 	return Cor();
 }
 
+Cor operator*(const Cor & vlh, float vrh) {
+	return Cor(vlh.r * vrh, vlh.g * vrh, vlh.b * vrh);
+}
+
 Cor operator+(const Cor& vlh, const Cor& vrh) {
 	return Cor(vlh.r + vrh.r, vlh.g + vrh.g, vlh.b + vrh.b);
 }

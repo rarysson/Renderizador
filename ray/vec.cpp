@@ -15,6 +15,10 @@ Vec3 operator+(const Vec3& vlh, const Vec3& vrh) {
 	return Vec3(vlh.x + vrh.x, vlh.y + vrh.y, vlh.z + vrh.z);
 }
 
+Vec3 operator+(const Vec3 & vlh, int vrh) {
+	return Vec3(vlh.x + vrh, vlh.y + vrh, vlh.z + vrh);
+}
+
 Vec3 operator-(const Vec3& vlh, const Vec3& vrh) {
 	return Vec3(vlh.x - vrh.x, vlh.y - vrh.y, vlh.z - vrh.z);
 }
