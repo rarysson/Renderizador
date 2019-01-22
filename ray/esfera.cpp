@@ -21,8 +21,8 @@ Vec3* Esfera::interceptar(const Raio& r) const {
 	Vec3 vet_dir = r.get_vetor();
 
 	float a = vet_dir.produto_escalar(vet_dir);
-	float b = 2 * r.origem.produto_escalar(vet_dir) - 2 * centro.produto_escalar(vet_dir);
-	float c = r.origem.produto_escalar(r.origem) - 2 * r.origem.produto_escalar(centro) + centro.produto_escalar(centro) - (raio * raio);
+	float b = (2 * r.origem.produto_escalar(vet_dir)) - (2 * centro.produto_escalar(vet_dir));	
+	float c = r.origem.produto_escalar(r.origem) - (2 * r.origem.produto_escalar(centro)) + centro.produto_escalar(centro) - (raio * raio);
 
 	float delta = (b * b) - (4 * a * c);
 

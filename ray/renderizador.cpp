@@ -13,7 +13,9 @@ void Renderizador::gerar_imagem(const std::string& nome_arquivo) {
 
 	for (int j = 0; j < img.altura; ++j) {
 		for (int i = 0; i < img.largura; ++i) {
-			imagem << int(255 * buffer_pixel[i][j].r) << ' ' << int(255 * buffer_pixel[i][j].g) << ' ' << int(255 * buffer_pixel[i][j].b) << '\n';
+			imagem << static_cast<int>(255 * buffer_pixel[i][j].r) << ' ' 
+					<< static_cast<int>(255 * buffer_pixel[i][j].g) << ' ' 
+					<< static_cast<int>(255 * buffer_pixel[i][j].b) << '\n';
 		}
 	}
 

@@ -15,14 +15,11 @@ void Cena::adicionar_luz(const Luz& l) {
 ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	ObjIntersecao obj;
 
-	obj.ponto_interceptado = Vec3(10000.0f, 10000.0f, 10000.0f);
-
-	Vec3 vet_dirt = obj.ponto_interceptado - raio.origem;
-	float menor_distancia = vet_dirt.modulo();
+	float menor_distancia = 50000.0f;
 
 	for (auto esfera : lista_esferas) {
-		if (esfera.get_centro() == esf_inter.get_centro())
-			continue;
+		//if (esfera.get_centro() == esf_inter.get_centro())
+			//continue;
 
 		Vec3* ponto_interceptado = esfera.interceptar(raio);
 
@@ -70,7 +67,7 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 }
 
 bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
-	Raio r = Raio(obj.ponto_interceptado, luz.posicao);
+	Raio r = Raio(luz.posicao, obj.ponto_interceptado);
 
 	for (auto esfera : lista_esferas) {
 		if (esfera.get_centro() == obj.esfera.get_centro()) {
@@ -80,8 +77,12 @@ bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
 		Vec3* ponto_l = esfera.interceptar(r);
 
 		if (ponto_l != nullptr) {
+			float raiz = (*ponto_l - luz.posicao).modulo() / r.get_vetor().modulo();
+
+			if (raiz >= 0.0f && raiz <= 1.0f)
+				return false;
+
 			delete ponto_l;
-			return false;
 		}
 	}
 
