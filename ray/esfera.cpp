@@ -34,7 +34,7 @@ Vec3* Esfera::interceptar(const Raio& r) const {
 
 			return new Vec3(r.ponto_no_parametro(raiz));
 		} else {
-			float raiz = (-b + std::sqrtf(delta)) / (2.0f * a);
+			float raiz = (-b - std::sqrtf(delta)) / (2.0f * a);
 
 			return new Vec3(r.ponto_no_parametro(raiz));
 		}

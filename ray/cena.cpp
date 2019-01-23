@@ -47,7 +47,7 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 
 	for (auto luz : lista_luzes) {
 		if (objeto_visivel_a_luz(obj, luz)) {
-			Vec3 l = (obj.ponto_interceptado - luz.posicao).normalizar();
+			Vec3 l = (luz.posicao - obj.ponto_interceptado).normalizar();
 			Vec3 e = obj.esfera.normal(obj.ponto_interceptado);
 
 			float co = e.produto_escalar(l);
