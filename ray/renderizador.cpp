@@ -23,6 +23,8 @@ void Renderizador::gerar_imagem(const std::string& nome_arquivo) {
 }
 
 void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispersao) {
+	bool ja_interceptou = false;
+
 	for (int j = 0; j < img.altura; ++j) {
 		std::vector<Cor> v;
 
@@ -34,22 +36,28 @@ void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispers
 			Cor c;			
 
 			for (int k = 0; k < numero_amostras; ++k) {
+				Raio r2 = r;	
 				ObjIntersecao obj = cena.tracejar_raio(r, Esfera());
-				Raio r2 = r;				
 
 				for (int p = 0; p < profundidade_dispersao; ++p) {
 					if (obj.interceptou) {
 						c += cena.determinar_cor_objeto(obj);
 						r2 = obj.esfera.dispersar_raio(r2);
 						obj = cena.tracejar_raio(r2, obj.esfera);
+						ja_interceptou = true;
+					} else if ((!obj.interceptou) && ja_interceptou) {
+						c += Cor();
 					} else {
-						c += Cor(0.29f, 0.84f, 0.92f);
+						c += Cor(0.5f, 0.5f, 0.5f);
 						break;
 					}
 				}
+
+				ja_interceptou = false;
 			}
 
 			c /= numero_amostras;
+			c.saturar();
 			v.push_back(c);
 		}
 

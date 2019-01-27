@@ -18,8 +18,8 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	float menor_distancia = 50000.0f;
 
 	for (auto esfera : lista_esferas) {
-		//if (esfera.get_centro() == esf_inter.get_centro())
-			//continue;
+		if (esfera.get_centro() == esf_inter.get_centro())
+			continue;
 
 		Vec3* ponto_interceptado = esfera.interceptar(raio);
 
@@ -50,18 +50,18 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 			Vec3 l = (luz.posicao - obj.ponto_interceptado).normalizar();
 			Vec3 e = obj.esfera.normal(obj.ponto_interceptado);
 
-			float co = e.produto_escalar(l);
+			float cos = e.produto_escalar(l);
 
-			if (co > 0.0f)
-				c += /*luz.cor +*/ obj.esfera.get_cor() * co;
+			if (cos > 0.0f)
+				c += /*luz.cor +*/ obj.esfera.get_cor() * cos;
 
 			++n;
 		}
 	}
 
-	if (c != Cor(0.0f, 0.0f, 0.0f)) {
+	/*if (c != Cor(0.0f, 0.0f, 0.0f)) {
 		c /= n;
-	}
+	}*/
 
 	return c;
 }

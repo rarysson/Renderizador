@@ -19,6 +19,8 @@ public:
 
 	Cor soma_com_saturacao(const Cor& c) const;
 
+	void saturar();
+
 	friend Cor operator*(const Cor& vlh, const Cor& vrh);
 
 	friend Cor operator*(const Cor& vlh, float vrh);
