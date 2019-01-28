@@ -28,7 +28,7 @@ public:
 		}
 	}*/
 
-	ObjIntersecao tracejar_raio(const Raio& raio, const Esfera& esf_inter);
+	ObjIntersecao tracejar_raio(const Raio& raio, const Esfera& esf_inter = Esfera());
 
 	Cor determinar_cor_objeto(const ObjIntersecao& obj);
 

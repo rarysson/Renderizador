@@ -6,13 +6,13 @@
 
 struct Raio {
 	Vec3 origem;
-	Vec3 destino;
+	Vec3 direcao;
 
 	Raio(const Vec3& o, const Vec3& d);
 
 	Vec3 ponto_no_parametro(float t) const;
 
-	Vec3 get_vetor() const;
+	Vec3 destino() const;
 };
 
 #endif

@@ -77,7 +77,7 @@ bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
 		Vec3* ponto_l = esfera.interceptar(r);
 
 		if (ponto_l != nullptr) {
-			float raiz = (*ponto_l - luz.posicao).modulo() / r.get_vetor().modulo();
+			float raiz = (*ponto_l - luz.posicao).modulo() / r.direcao.modulo();
 
 			if (raiz >= 0.0f && raiz <= 1.0f)
 				return false;

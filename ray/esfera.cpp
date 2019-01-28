@@ -18,7 +18,7 @@ Cor Esfera::get_cor() const {
 }
 
 Vec3* Esfera::interceptar(const Raio& r) const {
-	Vec3 vet_dir = r.get_vetor();
+	Vec3 vet_dir = r.direcao;
 
 	float a = vet_dir.produto_escalar(vet_dir);
 	float b = (2 * r.origem.produto_escalar(vet_dir)) - (2 * centro.produto_escalar(vet_dir));	
