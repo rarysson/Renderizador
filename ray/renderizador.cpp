@@ -42,7 +42,7 @@ void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispers
 				for (int p = 0; p < profundidade_dispersao; ++p) {
 					if (obj.interceptou) {
 						c += cena.determinar_cor_objeto(obj);
-						r2 = obj.esfera.dispersar_raio(r2);
+						r2 = obj.esfera.dispersar_raio(r2, obj);
 						obj = cena.tracejar_raio(r2, obj.esfera);
 						ja_interceptou = true;
 					} else if ((!obj.interceptou) && ja_interceptou) {

@@ -1,5 +1,6 @@
 #include "esfera.h"
 #include "material.h"
+#include "intersecao.h"
 
 
 
@@ -41,8 +42,8 @@ Vec3* Esfera::interceptar(const Raio& r) const {
 	}
 }
 
-Raio Esfera::dispersar_raio(const Raio& raio) const {
-	return  material->dispersar(raio, *this);
+Raio Esfera::dispersar_raio(const Raio& raio, const ObjIntersecao& obj) const {
+	return  material->dispersar(raio, obj);
 }
 
 Vec3 Esfera::get_centro() const {
