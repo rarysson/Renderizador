@@ -28,7 +28,7 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 			float dist = vd.modulo();
 
 			if (dist < menor_distancia) {
-				obj.esfera = esfera;
+				obj.objeto = esfera;
 				obj.ponto_interceptado = *ponto_interceptado;
 				obj.interceptou = true;
 				menor_distancia = dist;
@@ -43,25 +43,18 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 
 Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 	Cor c;
-	int n = 0;
 
 	for (auto luz : lista_luzes) {
 		if (objeto_visivel_a_luz(obj, luz)) {
 			Vec3 l = (luz.posicao - obj.ponto_interceptado).normalizar();
-			Vec3 e = obj.esfera.normal(obj.ponto_interceptado);
+			Vec3 e = obj.objeto.normal(obj.ponto_interceptado);
 
 			float cos = e.produto_escalar(l);
 
 			if (cos > 0.0f)
-				c += /*luz.cor +*/ obj.esfera.get_cor() * cos;
-
-			++n;
+				c += (luz.cor * obj.objeto.get_cor()) * cos;
 		}
 	}
-
-	/*if (c != Cor(0.0f, 0.0f, 0.0f)) {
-		c /= n;
-	}*/
 
 	return c;
 }
@@ -70,7 +63,7 @@ bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
 	Raio r = Raio(luz.posicao, obj.ponto_interceptado);
 
 	for (auto esfera : lista_esferas) {
-		if (esfera.get_centro() == obj.esfera.get_centro()) {
+		if (esfera.get_centro() == obj.objeto.get_centro()) {
 			continue;
 		}
 

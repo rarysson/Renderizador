@@ -7,7 +7,7 @@
 
 
 struct ObjIntersecao {
-	Esfera esfera;
+	Esfera objeto;
 	Vec3 ponto_interceptado;
 	bool interceptou = false;
 

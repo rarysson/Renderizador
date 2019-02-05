@@ -27,7 +27,7 @@ void Cor::saturar() {
 }
 
 Cor operator*(const Cor & vlh, const Cor & vrh) {
-	return Cor();
+	return Cor(vlh.r * vrh.r, vlh.g * vrh.g, vlh.b * vrh.b);
 }
 
 Cor operator*(const Cor & vlh, float vrh) {
