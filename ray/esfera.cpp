@@ -30,14 +30,18 @@ Vec3* Esfera::interceptar(const Raio& r) const {
 	if (delta < 0.0f) {
 		return nullptr;
 	} else {
-		if (delta == 0.0f) {
-			float raiz = -b / (2.0f * a);
+		float raiz = -1.0f;
 
+		if (delta == 0.0f) {
+			raiz = -b / (2.0f * a);			
+		} else {
+			raiz = (-b - std::sqrtf(delta)) / (2.0f * a);
+		}
+
+		if (raiz >= 0.0f) {
 			return new Vec3(r.ponto_no_parametro(raiz));
 		} else {
-			float raiz = (-b - std::sqrtf(delta)) / (2.0f * a);
-
-			return new Vec3(r.ponto_no_parametro(raiz));
+			return nullptr;
 		}
 	}
 }

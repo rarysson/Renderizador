@@ -1,5 +1,5 @@
 #include "cena.h"
-#include <iostream>
+#include <limits>
 
 Cena::Cena(const std::vector<Esfera>& e, const std::vector<Luz>& l) : 
 	lista_esferas {e}, lista_luzes {l} {}
@@ -15,7 +15,7 @@ void Cena::adicionar_luz(const Luz& l) {
 ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	ObjIntersecao obj;
 
-	float menor_distancia = 50000.0f;
+	float menor_distancia = static_cast<float>(INT32_MAX);
 
 	for (auto esfera : lista_esferas) {
 		if (esfera.get_centro() == esf_inter.get_centro()) {
