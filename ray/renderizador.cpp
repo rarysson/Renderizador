@@ -37,7 +37,7 @@ void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispers
 
 			for (int k = 0; k < numero_amostras; ++k) {
 				Raio r2 = r;	
-				ObjIntersecao obj = cena.tracejar_raio(r);
+				ObjIntersecao obj = cena.tracejar_raio(r2);
 
 				for (int p = 0; p < profundidade_dispersao; ++p) {
 					if (obj.interceptou) {

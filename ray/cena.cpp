@@ -18,8 +18,9 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	float menor_distancia = 50000.0f;
 
 	for (auto esfera : lista_esferas) {
-		if (esfera.get_centro() == esf_inter.get_centro())
+		if (esfera.get_centro() == esf_inter.get_centro()) {
 			continue;
+		}
 
 		Vec3* ponto_interceptado = esfera.interceptar(raio);
 
