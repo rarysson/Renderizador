@@ -61,7 +61,7 @@ Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
 }
 
 bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
-	Raio r = Raio(luz.posicao, obj.ponto_interceptado);
+	Raio r = Raio(obj.ponto_interceptado, luz.posicao - obj.ponto_interceptado);
 
 	for (auto esfera : lista_esferas) {
 		if (esfera.get_centro() == obj.objeto.get_centro()) {

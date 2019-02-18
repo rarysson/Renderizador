@@ -3,7 +3,17 @@
 
 
 Renderizador::Renderizador(const Cena& cen, const Camera& cam, const Imagem& i) :
-	cena {cen}, camera {cam}, img {i} { }
+cena {cen}, camera {cam}, img {i} {
+	for (int j = 0; j < img.altura; ++j) {
+		std::vector<Cor> v;
+
+		for (int i = 0; i < img.largura; ++i) {
+			v.push_back(Cor());
+		}
+
+		buffer_pixel.push_back(v);
+	}
+}
 
 void Renderizador::gerar_imagem(const std::string& nome_arquivo) {
 	std::string nome = nome_arquivo + ".ppm";
@@ -26,7 +36,6 @@ void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispers
 	bool ja_interceptou = false;
 
 	for (int j = 0; j < img.altura; ++j) {
-		std::vector<Cor> v;
 
 		for (int i = 0; i < img.largura; ++i) {
 			float alfa = (2.0f * j) / (img.largura - 1.0f) - 1.0f;
@@ -58,9 +67,7 @@ void Renderizador::renderizar_cena(int numero_amostras, int profundidade_dispers
 
 			c /= numero_amostras;
 			c.saturar();
-			v.push_back(c);
+			buffer_pixel[j][i] = c;
 		}
-
-		buffer_pixel.push_back(v);
 	}
 }
