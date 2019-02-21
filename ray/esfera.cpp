@@ -53,3 +53,7 @@ Raio Esfera::dispersar_raio(const Raio& raio, const ObjIntersecao& obj) const {
 Vec3 Esfera::get_centro() const {
 	return centro;
 }
+
+float Esfera::get_raio() const {
+	return raio;
+}

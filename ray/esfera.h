@@ -31,6 +31,8 @@ public:
 	Raio dispersar_raio(const Raio& raio, const ObjIntersecao& obj) const;
 
 	Vec3 get_centro() const;
+
+	float get_raio() const;
 };
 
 #endif

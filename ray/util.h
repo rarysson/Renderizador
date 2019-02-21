@@ -4,9 +4,9 @@
 #include <random>
 
 namespace ut {
-	int int_aleatorio(int inicio, int fim);
+	int int_aleatorio(int min, int max);
 
-	float float_aleatorio(float inicio, float fim);
+	float float_aleatorio(float min, float max);
 }
 
 #endif

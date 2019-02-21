@@ -13,5 +13,15 @@ Raio Liso::dispersar(const Raio& raio_origem, const ObjIntersecao& obj_intercept
 }
 
 Raio Difuso::dispersar(const Raio& raio_origem, const ObjIntersecao& obj_interceptado) {
-	return Raio();
+	Vec3 ponto_aleatorio;
+
+	do {
+		ponto_aleatorio = Vec3(ut::float_aleatorio(-1.0f, 1.0f),
+							   ut::float_aleatorio(-1.0f, 1.0f),
+							   ut::float_aleatorio(-1.0f, 1.0f));
+	} while (ponto_aleatorio.modulo() >= 1.0f);
+
+	Vec3 point = obj_interceptado.ponto_interceptado + obj_interceptado.objeto.normal(obj_interceptado.ponto_interceptado) + ponto_aleatorio;
+
+	return Raio(obj_interceptado.ponto_interceptado, point - obj_interceptado.ponto_interceptado);
 }
