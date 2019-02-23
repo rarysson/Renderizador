@@ -14,10 +14,6 @@ Vec3 Esfera::normal(const Vec3& p) const {
 	return (p - centro).normalizar();
 }
 
-Cor Esfera::get_cor() const {
-	return cor;
-}
-
 Vec3* Esfera::interceptar(const Raio& r) const {
 	Vec3 vet_dir = r.direcao;
 
@@ -56,4 +52,8 @@ Vec3 Esfera::get_centro() const {
 
 float Esfera::get_raio() const {
 	return raio;
+}
+
+Cor Esfera::get_cor() const {
+	return cor;
 }

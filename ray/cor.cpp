@@ -7,14 +7,6 @@ Cor::Cor() {}
 Cor::Cor(float r_, float g_, float b_) : 
 	r {r_}, g {g_}, b {b_} {}
 
-Cor Cor::soma_com_saturacao(const Cor& c) const {
-	float r_ = (r + c.r) > 1.0f ? 1.0f : (r + c.r);
-	float g_ = (g + c.g) > 1.0f ? 1.0f : (g + c.g);
-	float b_ = (b + c.b) > 1.0f ? 1.0f : (b + c.b);
-
-	return Cor(r_, g_, b_);
-}
-
 void Cor::saturar() {
 	if (r > 1.0f)
 		r = 1.0f;

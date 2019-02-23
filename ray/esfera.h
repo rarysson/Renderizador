@@ -6,8 +6,8 @@
 #include "raio.h"
 
 
-struct Material;
-struct ObjIntersecao;
+class Material;
+class ObjIntersecao;
 
 
 class Esfera {
@@ -24,8 +24,6 @@ public:
 
 	Vec3 normal(const Vec3& p) const;
 
-	Cor get_cor() const;
-
 	Vec3* interceptar(const Raio& r) const;
 
 	Raio dispersar_raio(const Raio& raio, const ObjIntersecao& obj) const;
@@ -33,6 +31,8 @@ public:
 	Vec3 get_centro() const;
 
 	float get_raio() const;
+
+	Cor get_cor() const;
 };
 
 #endif

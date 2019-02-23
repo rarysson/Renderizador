@@ -6,7 +6,6 @@
 
 
 
-
 class Camera {
 private:
 	Vec3 origem_visao;
@@ -14,7 +13,7 @@ private:
 	Vec3 vet_h;
 	Vec3 vet_v;
 public:
-	Camera(const Vec3& o, const Vec3& d, const Vec3& h, const Vec3& v);
+	Camera(const Vec3& origem, const Vec3& destino, const Vec3& v_hori, const Vec3& v_vert);
 
 	Raio tracejar_raio(float x, float y) const;
 };

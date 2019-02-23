@@ -6,11 +6,13 @@
 
 
 
-struct ObjIntersecao {
+class ObjIntersecao {
+public:
 	Esfera objeto;
 	Vec3 ponto_interceptado;
 	bool interceptou = false;
 
+public:
 	ObjIntersecao();
 };
 

@@ -4,10 +4,12 @@
 #include "vec.h"
 
 
-struct Raio {
+class Raio {
+public:
 	Vec3 origem;
 	Vec3 direcao;
 
+public:
 	Raio();
 
 	Raio(const Vec3& o, const Vec3& d);

@@ -22,15 +22,9 @@ public:
 
 	void adicionar_luz(const Luz& l);
 
-	/*void gerar_cena_aleatoria(int quantidade_esferas, int quantidade_luzes) {
-		for (int i = 0; i < quantidade_esferas; ++i) {
-			Esfera e
-		}
-	}*/
-
 	ObjIntersecao tracejar_raio(const Raio& raio, const Esfera& esf_inter = Esfera());
 
-	Cor determinar_cor_objeto(const ObjIntersecao& obj);
+	Cor determinar_cor_objeto(ObjIntersecao& obj, const Raio& raio, int profundidade);
 
 private:
 	bool objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz);

@@ -25,3 +25,7 @@ Raio Difuso::dispersar(const Raio& raio_origem, const ObjIntersecao& obj_interce
 
 	return Raio(obj_interceptado.ponto_interceptado, point - obj_interceptado.ponto_interceptado);
 }
+
+Raio Opaco::dispersar(const Raio& raio_origem, const ObjIntersecao& obj_interceptado) {
+	return raio_origem;
+}

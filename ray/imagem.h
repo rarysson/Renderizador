@@ -3,10 +3,12 @@
 
 
 
-struct Imagem {
+class Imagem {
+public:
 	int largura;
 	int altura;
 
+public:
 	Imagem(int l, int a);
 };
 

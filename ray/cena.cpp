@@ -42,26 +42,39 @@ ObjIntersecao Cena::tracejar_raio(const Raio& raio, const Esfera& esf_inter) {
 	return obj;
 }
 
-Cor Cena::determinar_cor_objeto(const ObjIntersecao& obj) {
-	Cor c;
+Cor Cena::determinar_cor_objeto(ObjIntersecao& obj, const Raio& raio, int profundidade) {
+	if (!obj.interceptou) {
+		return Cor(0.0f, 0.0f, 0.0f);
+	} else {
+		Cor c;
 
-	for (auto luz : lista_luzes) {
-		if (objeto_visivel_a_luz(obj, luz)) {
-			Vec3 l = (luz.posicao - obj.ponto_interceptado).normalizar();
-			Vec3 e = obj.objeto.normal(obj.ponto_interceptado);
+		for (auto luz : lista_luzes) {
+			if (objeto_visivel_a_luz(obj, luz)) {
+				Vec3 l = (luz.get_posicao() - obj.ponto_interceptado).normalizar();
+				Vec3 e = obj.objeto.normal(obj.ponto_interceptado);
 
-			float cos = e.produto_escalar(l);
+				float cos = l.produto_escalar(e);
 
-			if (cos > 0.0f)
-				c += (luz.cor * obj.objeto.get_cor()) * cos;
+				if (cos < 0.0f)
+					cos = 0.0f;
+
+				c += (obj.objeto.get_cor() * luz.get_cor()) * cos;
+			}
+		}
+
+		if (profundidade == 0) {
+			return c;
+		} else {
+			Raio r = obj.objeto.dispersar_raio(raio, obj);
+			obj = tracejar_raio(r, obj.objeto);
+
+			return c + determinar_cor_objeto(obj, r, profundidade - 1);
 		}
 	}
-
-	return c;
 }
 
 bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
-	Raio r = Raio(obj.ponto_interceptado, luz.posicao - obj.ponto_interceptado);
+	Raio r = Raio(obj.ponto_interceptado, luz.get_posicao() - obj.ponto_interceptado);
 
 	for (auto esfera : lista_esferas) {
 		if (esfera.get_centro() == obj.objeto.get_centro()) {
@@ -71,12 +84,13 @@ bool Cena::objeto_visivel_a_luz(const ObjIntersecao& obj, const Luz& luz) {
 		Vec3* ponto_l = esfera.interceptar(r);
 
 		if (ponto_l != nullptr) {
-			float raiz = (*ponto_l - luz.posicao).modulo() / r.direcao.modulo();
-
-			if (raiz >= 0.0f && raiz <= 1.0f)
-				return false;
+			float raiz = (*ponto_l - luz.get_posicao()).modulo() / r.direcao.modulo();
 
 			delete ponto_l;
+
+			if (raiz >= 0.0f && raiz <= 1.0f) {
+				return false;
+			}
 		}
 	}
 
