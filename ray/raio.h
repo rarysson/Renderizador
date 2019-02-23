@@ -15,8 +15,6 @@ public:
 	Raio(const Vec3& o, const Vec3& d);
 
 	Vec3 ponto_no_parametro(float t) const;
-
-	Vec3 destino() const;
 };
 
 #endif
